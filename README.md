@@ -46,7 +46,7 @@ pacman -S make
 2.1. Create directory, then go to this directoty:
 
 ```
-cd <somethink directories>
+cd <some directories>
 ```
 
 2.2. Input this command in terminal to create "src", "headers" and build" directories and main.cpp file:
