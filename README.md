@@ -1,5 +1,5 @@
 # 1. Install make
-Input command in terminal:
+Input this commands in terminal:
 
 1.1. For Linux distributions
 
@@ -86,7 +86,24 @@ Also, you may compile and run project by command:
 make all
 ```
 
-# 5. Clear directories with executable objective files
+# 5. Send your project to GitHub
+Input this command in terminal:
+
+```
+make gpush
+```
+
+`
+Enter the names of files and/or directories to send to GitHub:
+`
+as you do when using the **git init** command
+
+`
+Enter commit message
+`
+without ""
+
+# 6. Clear directories with executable objective files
 Input this command in terminal:
 
 ```
