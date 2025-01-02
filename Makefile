@@ -142,4 +142,4 @@ gcreate: create
 		echo '    cm = commit -m' >> .git/config; \
 		echo '    co = checkout' >> .git/config; \
 		echo '    br = branch' >> .git/config; \
-	fi
+	f

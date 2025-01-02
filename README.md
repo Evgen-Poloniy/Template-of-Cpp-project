@@ -36,7 +36,7 @@ xcode-select --install
 
 1.3. For Windows
 
-Use MSYS2 and input commande in termainal:
+Use MSYS2 and input command in termainal:
 
 ```
 pacman -S make
@@ -49,16 +49,22 @@ pacman -S make
 cd <somethink directories>
 ```
 
-2.2. Input this commande in terminal to create "src", "headers" and build" directories and main.cpp file:
+2.2. Input this command in terminal to create "src", "headers" and build" directories and main.cpp file:
 
 ```
 make create
 ```
 
+2.3. If you want to create directories with **git** initialization, use this command:
+
+```
+make gcreate
+```
+
 You may change name of this directories in Makefile (change points 7.1 - 7.6)
 
 # 3. Compile your project
-Input this commande in terminal:
+Input this command in terminal:
 
 ```
 make comp
@@ -68,20 +74,20 @@ You can choose build type at point 1 and bitness of architecture at points 2
 Also, you can change parametrs at points 1 - 7.6
 
 # 4. Run your project
-Input this commande in terminal:
+Input this command in terminal:
 
 ```
 make run
 ```
 
-Also, you may compile and run project by commande:
+Also, you may compile and run project by command:
 
 ```
 make all
 ```
 
 # 5. Clear directories with executable objective files
-Input this commande in terminal:
+Input this command in terminal:
 
 ```
 make clean
