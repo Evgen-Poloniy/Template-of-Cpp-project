@@ -143,3 +143,10 @@ gcreate: create
 		echo '    co = checkout' >> .git/config; \
 		echo '    br = branch' >> .git/config; \
 	fi
+
+gpush:
+	@input_files=$(shell read -p "Enter the names of files and/or directories to send to GitHub: " var && echo $$var) && \
+	git add $$input_files
+	@input_commit=$(shell read -p "Enter commit message: " var && echo $$var) && \
+	git commit -m "$$input_commit"
+	git push
