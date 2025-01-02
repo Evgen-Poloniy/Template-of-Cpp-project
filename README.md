@@ -61,17 +61,47 @@ make create
 make gcreate
 ```
 
-You may change name of this directories in Makefile (change points 7.1 - 7.6)
+* Be warned, this command performs commant **git init** and creates hidden folder with **git** configuration file
+
+You may change name of this directories in Makefile (change points 7.1 - 10)
 
 # 3. Compile your project
-Input this command in terminal:
+In Makefile you can choose some parametrs:
+
+Type of build:
+
+```
+#-----------------------------------------|
+# 1. Choose Debug/Release:                |
+BUILD = Debug
+#-----------------------------------------|
+```
+
+Bitness of architecture:
+
+```
+#-----------------------------------------|
+# 2. Choose x32/x64:                      |
+ARCH = x64
+#-----------------------------------------|
+```
+
+Platform:
+
+```
+#-----------------------------------------|
+# 3. Choose platforms Win/Linux/Mac       |
+PLATFORM = Linux
+#-----------------------------------------|
+```
+
+And differend parametrs by point 10 
+
+Input this command in terminal to compile your project:
 
 ```
 make comp
 ```
-
-You can choose build type at point 1 and bitness of architecture at points 2
-Also, you can change parametrs at points 1 - 7.6
 
 # 4. Run your project
 Input this command in terminal:

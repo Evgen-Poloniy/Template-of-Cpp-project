@@ -1,57 +1,60 @@
 #-----------------------------------------|
-# 1. Choose: Debug/Release:               |
+# 1. Choose Debug/Release:                |
 BUILD = Debug
 #-----------------------------------------|
-# 2. Choose: x32/x64:                     |
+# 2. Choose x32/x64:                      |
 ARCH = x64
 #-----------------------------------------|
-# 3. Choose compile name:                 |
+# 3. Choose platforms Win/Linux/Mac       |
+PLATFORM = Linux
+#-----------------------------------------|
+# 4. Choose compile name:                 |
 CXX = g++
 #-----------------------------------------|
-# 4. Choose standard of C++:              |
+# 5. Choose standard of C++:              |
 STD = -std=c++17
 #-----------------------------------------|
-# 5. Type of optimization and flags:      |
+# 6. Type of optimization and flags:      |
 #-----------------------------------------|
-# 5.1. For Debug:                         |
+# 6.1. For Debug:                         |
 OPT_D = -g -O0 -DDEBUG -Wall -Wextra
 #-----------------------------------------|
-# 5.2. For Release:                       |
+# 6.2. For Release:                       |
 OPT_R = -s -O2 -DNDEBUG
 #-----------------------------------------|
-# 6. Choose name of executable file       |
+# 7. Choose name of executable file       |
 #-----------------------------------------|
-# 6.1. For x32:                           |
+# 7.1. For x32:                           |
 EXE_32 = bin
 #-----------------------------------------|
-# 6.2. For x64:                           |
+# 7.2. For x64:                           |
 EXE_64 = bin64
 #-----------------------------------------|
-# 7. Choose name of directories           |
+# 8. Choose name of directories           |
 #------------------------------------------
-# 7.1. For source files:                  |
+# 8.1. For source files:                  |
 SRC_DIR = src
 #-----------------------------------------|
-# 7.2. For headers files:                 |
+# 8.2. For headers files:                 |
 HEADERS_DIR = headers
 #-----------------------------------------|
-# 7.3. For objective files:               |
+# 8.3. For objective files:               |
 OBJ_DIR = obj
 #-----------------------------------------|
-# 7.4. For exetutable file x32:           |
+# 8.4. For exetutable file x32:           |
 BIN_32_DIR = bin
 #-----------------------------------------|
-# 7.5. For executable file x64:           |
+# 8.5. For executable file x64:           |
 BIN_64_DIR = bin64
 #-----------------------------------------|
-# 7.6. For build settings:                |
+# 8.6. For build settings:                |
 BS_DIR = build
 #-----------------------------------------|
-# Enter third party libs                  |
+# 9. Enter third party libs                  |
 # (leave empty if not):                   |
 LIBS =
 #-----------------------------------------|
-# Enter third party libs includes:        |
+# 10. Enter third party libs includes:        |
 # (leave empty if not):                   |
 INC = 
 #-----------------------------------------|
@@ -71,21 +74,39 @@ endif
 # Flags for x32 or x64
 ifeq ($(ARCH), x64)
     EXE = $(EXE_64)
+    EXE_NAME = $(EXE_64)
     CXXFLAGS += -m64
     BIN_DIR = $(BIN_64_DIR)
 else ifeq ($(ARCH), x32)
     EXE = $(EXE_32)
+    EXE_NAME = $(EXE_32)
     CXXFLAGS += -m32
     BIN_DIR = $(BIN_32_DIR)
 else
     $(error "Error: invalid architecture bit depth (Used: $(ARCH), expected: x32 or x64)")
 endif
 
+# Flags for platforms (Win/Linux/Mac)
+ifeq ($(PLATFORM), Win)
+    CXXFLAGS += -DWIN
+    EXE = $(EXE_NAME).exe
+    OBJ_F = obj
+else ifeq ($(PLATFORM), Linux)
+    CXXFLAGS += -DLINUX
+    OBJ_F = o
+else ifeq ($(PLATFORM), Mac)
+    CXXFLAGS += -DMAC
+    OBJ_F = o
+    $(error "Unfortunately, comlilation for Mac has'nt ready yet")
+else
+    $(error "Error: invalid platform (Used: $(PLATFORM), expected: Win, Linux or Mac)")
+endif
+
 CXXFLAGS += -I$(HEADERS_DIR)
 
 # List of source and objective files:
 SRC = $(wildcard $(SRC_DIR)/*.cpp)
-OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRC))
+OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.$(OBJ_F), $(SRC))
 
 # Launching:
 RUN = ./$(BIN_DIR)/$(EXE)
@@ -99,7 +120,7 @@ $(BIN_DIR)/$(EXE): $(OBJ)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Compiling: create object files from source files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ_DIR)/%.$(OBJ_F): $(SRC_DIR)/%.cpp
 	mkdir -p $(OBJ_DIR)  # Create the directory for object files
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
