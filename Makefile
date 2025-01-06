@@ -139,14 +139,15 @@ all: comp run
 clean:
 	rm -rf $(OBJ_DIR)
 
+# Remove directories with objective and executable file:
 delbin:
 	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
 # Remove all directories:
 remove:
-	@read -p "Do you really want to delete all project directories (y/n)? " answer_remove_dir && \
+	@read -p "Do you really want to delete all project directories (y/n)?: " answer_remove_dir && \
 	if [ "$$answer_remove_dir" = "y" ]; then \
-		read -p "Warning! All files will be removed. You will not restore changes (y/n)? " confirm_remove && \
+		read -p "Warning! All files will be removed. You will not restore changes (y/n)?: " confirm_remove && \
 		if [ "$$confirm_remove" = "y" ]; then \
 			read -p "Enter key word ($(KEY_WORD_REMOVE)): " enter_dir && \
 			if [ "$$enter_dir" = $(KEY_WORD_REMOVE) ]; then \
@@ -197,5 +198,3 @@ gcm:
 	git add $$input_files
 	@input_commit=$(shell read -p "Enter commit message: " var && echo $$var) && \
 	git commit -m "$$input_commit"
-
-gpush: gcm git push

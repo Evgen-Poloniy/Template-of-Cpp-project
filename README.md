@@ -36,7 +36,11 @@ xcode-select --install
 
 1.3. For Windows
 
-Use MSYS2 and input command in termainal:
+* Download MSYS2
+
+>https://www.msys2.org/
+
+Download (for example) in directory: "C:\Programs\msys64\" or "C:\msys64\"
 
 ```
 pacman -S make
@@ -68,7 +72,7 @@ You may change name of this directories in Makefile (change points 7.1 - 10)
 # 3. Compile your project
 In Makefile you can choose some parametrs:
 
-Type of build:
+* Type of build:
 
 ```
 #-----------------------------------------|
@@ -77,7 +81,7 @@ BUILD = Debug
 #-----------------------------------------|
 ```
 
-Bitness of architecture:
+* Bitness of architecture:
 
 ```
 #-----------------------------------------|
@@ -86,7 +90,7 @@ ARCH = x64
 #-----------------------------------------|
 ```
 
-Platform:
+* Platform:
 
 ```
 #-----------------------------------------|
@@ -97,30 +101,30 @@ PLATFORM = Linux
 
 And differend parametrs by point 10 
 
-Input this command in terminal to compile your project:
+3.1. Input this command in terminal to compile your project:
 
 ```
 make comp
 ```
 
 # 4. Run your project
-Input this command in terminal:
+4.1. Input this command in terminal:
 
 ```
 make run
 ```
 
-Also, you may compile and run project by command:
+4.2. Also, you may compile and run project by command:
 
 ```
 make all
 ```
 
-# 5. Send your project to GitHub
-Input this command in terminal:
+# 5. Create commit at git
+5.1. Input this command in terminal:
 
 ```
-make gpush
+make gcm
 ```
 
 `
@@ -131,15 +135,45 @@ as you do when using the **git init** command
 `
 Enter commit message
 `
-without ""
+without *" "*
 
-# 6. Clear directories with executable objective files
-Input this command in terminal:
+5.2. If you want to send changes at GitHub repository use this command:
 
 ```
-make clean
+git push
 ```
- 
+
+# 6. Remove directories with objective and executable files
+Input this commands in terminal to:
+
+6.1. Remove directories with objective and executable files:
+
+```
+make delbin
+```
+
+6.2. Remove all directories without restoration:
+
+***Warning! Use this command with caution. Srpipt will request confirmation of actions***
+
+```
+make remove
+```
+
+`
+Do you really want to delete all project directories (y/n)?:
+`
+y
+
+`
+Warning! All files will be removed. You will not restore changes (y/n)?:
+`
+y
+
+`
+Enter key word (Remove_all):
+`
+Remove_all
 ____
 
 >Edit Makefile for your purpose
