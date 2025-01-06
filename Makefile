@@ -58,7 +58,9 @@ LIBS =
 # (leave empty if not):                   |
 INC = 
 #-----------------------------------------|
-KEY_WORD = key
+# 11. Key word for removing all dir:      |
+KEY_WORD_REMOVE = Remove_all
+#-----------------------------------------|
 
 # Flags for compilation:
 CXXFLAGS = $(STD)
@@ -137,16 +139,19 @@ all: comp run
 clean:
 	rm -rf $(OBJ_DIR)
 
+delbin:
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
+
 # Remove all directories:
 remove:
 	@read -p "Do you really want to delete all project directories (y/n)? " answer_remove_dir && \
 	if [ "$$answer_remove_dir" = "y" ]; then \
 		read -p "Warning! All files will be removed. You will not restore changes (y/n)? " confirm_remove && \
 		if [ "$$confirm_remove" = "y" ]; then \
-			read -p "Enter key word (Watch in Makefile): " enter_dir && \
-			if [ "$$enter_dir" = $(KEY_WORD) ]; then \
+			read -p "Enter key word ($(KEY_WORD_REMOVE)): " enter_dir && \
+			if [ "$$enter_dir" = $(KEY_WORD_REMOVE) ]; then \
 				rm -rf $(SRC_DIR) $(HEADERS_DIR) $(BS_DIR) $(OBJ_DIR) $(BIN_DIR); \
-				echo "Removed..."; \
+				echo "All directories has removed without restoration..."; \
 			else \
 				echo "Wrong root directory name"; \
 			fi; \
@@ -187,9 +192,10 @@ gcreate: create
 		echo '    br = branch' >> .git/config; \
 	fi
 
-gpush:
+gcm:
 	@input_files=$(shell read -p "Enter the names of files and/or directories to send to GitHub: " var && echo $$var) && \
 	git add $$input_files
 	@input_commit=$(shell read -p "Enter commit message: " var && echo $$var) && \
 	git commit -m "$$input_commit"
-	git push
+
+gpush: gcm git push
