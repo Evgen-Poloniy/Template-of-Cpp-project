@@ -50,14 +50,15 @@ BIN_64_DIR = bin64
 # 8.6. For build settings:                |
 BS_DIR = build
 #-----------------------------------------|
-# 9. Enter third party libs                  |
+# 9. Enter third party libs               |
 # (leave empty if not):                   |
 LIBS =
 #-----------------------------------------|
-# 10. Enter third party libs includes:        |
+# 10. Enter third party libs includes:    |
 # (leave empty if not):                   |
 INC = 
 #-----------------------------------------|
+KEY_WORD = key
 
 # Flags for compilation:
 CXXFLAGS = $(STD)
@@ -102,9 +103,8 @@ else
     $(error "Error: invalid platform (Used: $(PLATFORM), expected: Win, Linux or Mac)")
 endif
 
-CXXFLAGS += -I$(HEADERS_DIR)
+CXXFLAGS += -I$(HEADERS_DIR) $(INC) $(LIBS)
 
-# List of source and objective files:
 SRC = $(wildcard $(SRC_DIR)/*.cpp)
 OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.$(OBJ_F), $(SRC))
 
@@ -112,16 +112,18 @@ OBJ = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.$(OBJ_F), $(SRC))
 RUN = ./$(BIN_DIR)/$(EXE)
 
 # Compilation: create object files from source and linking them to create the executable
-comp: $(BIN_DIR)/$(EXE)
+comp: $(BIN_DIR)/$(EXE) clean
 
 # Linking: create the executable from object files
 $(BIN_DIR)/$(EXE): $(OBJ)
-	mkdir -p $(BIN_DIR)  # Create the directory for the executable file
+	rm -rf $(BIN_32_DIR)
+	rm -rf $(BIN_64_DIR)
+	mkdir -p $(BIN_DIR)
 	$(CXX) $(CXXFLAGS) -o $@ $^
 
 # Compiling: create object files from source files
 $(OBJ_DIR)/%.$(OBJ_F): $(SRC_DIR)/%.cpp
-	mkdir -p $(OBJ_DIR)  # Create the directory for object files
+	mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Launching:
@@ -133,7 +135,27 @@ all: comp run
 
 # Cleaning:
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR)
+	rm -rf $(OBJ_DIR)
+
+# Remove all directories:
+remove:
+	@read -p "Do you really want to delete all project directories (y/n)? " answer_remove_dir && \
+	if [ "$$answer_remove_dir" = "y" ]; then \
+		read -p "Warning! All files will be removed. You will not restore changes (y/n)? " confirm_remove && \
+		if [ "$$confirm_remove" = "y" ]; then \
+			read -p "Enter key word (Watch in Makefile): " enter_dir && \
+			if [ "$$enter_dir" = $(KEY_WORD) ]; then \
+				rm -rf $(SRC_DIR) $(HEADERS_DIR) $(BS_DIR) $(OBJ_DIR) $(BIN_DIR); \
+				echo "Removed..."; \
+			else \
+				echo "Wrong root directory name"; \
+			fi; \
+		else \
+			echo "Deletion aborted by user."; \
+		fi; \
+	else \
+		echo "Operation aborted by user."; \
+	fi
 
 # Create all directories:
 create:
