@@ -162,7 +162,7 @@ make all
 6.1. Input this command in terminal:
 
 ```
-make gcm
+make cm
 ```
 
 `
@@ -178,7 +178,7 @@ without *" "*
 6.2. If you want to send changes at GitHub repository use this command:
 
 ```
-git push
+make push
 ```
 
 # 7. Remove directories with objective and executable files
