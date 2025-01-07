@@ -42,6 +42,16 @@ xcode-select --install
 
 Download (for example) in directory: "C:\Programs\msys64\" or "C:\msys64\"
 
+* Add in field "Path" in **Environment variables in Windows** your path "C:\Programs\msys64\mingw64\bin" or "C:\msys64\mingw64\bin"
+
+* Open **Start menu** and launch **MSYS2 MINGW64**
+
+Input command in terminal MINGW64:
+
+```
+
+```
+
 ```
 pacman -S make
 ```
