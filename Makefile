@@ -193,8 +193,11 @@ gcreate: create
 		echo '    br = branch' >> .git/config; \
 	fi
 
-gcm:
+cm:
 	@input_files=$(shell read -p "Enter the names of files and/or directories to send to GitHub: " var && echo $$var) && \
 	git add $$input_files
 	@input_commit=$(shell read -p "Enter commit message: " var && echo $$var) && \
 	git commit -m "$$input_commit"
+
+push:
+	git push
