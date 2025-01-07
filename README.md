@@ -44,42 +44,70 @@ Download (for example) in directory: "C:\Programs\msys64\" or "C:\msys64\"
 
 * Add in field "Path" in **Environment variables in Windows** your path "C:\Programs\msys64\mingw64\bin" or "C:\msys64\mingw64\bin"
 
+>If you use x32 bitness arhitecture, use folder *mingw32* and terminal *MinGw32*
+
 * Open **Start menu** and launch **MSYS2 MINGW64**
 
 Input command in terminal MINGW64:
 
 ```
-pacman -S -yyu
+pacman -Syu
 ```
+
+Then for x64:
+
+```
+pacman -S mingw-w64-x86_64-gcc
+```
+
+For x32:
+
+```
+pacman -S mingw-w64-i686-gcc
+```
+
+Install make in MSYS2 MINGW64:
 
 ```
 pacman -S make
 ```
 
-# 2. Create working dirеctories
-2.1. Create directory, then go to this directoty:
+* Add in field "Path" at **Environment variables in Windows** your path for **make** "C:\Programs\msys64\mingw64\usr\bin" or "C:\msys64\mingw64\usr\bin"
+
+>If you use x32 bitness arhitecture, use folder *mingw32* and terminal *MinGw32*
+
+* If you use VS Code, run VS Code as **administrator**, because compilation with g++ requests access to temporary files in the **Temp** folder if you use **make** in GitBush terminal
+
+# 2. Download Git
+
+>https://git-scm.com/
+
+>If you work on Windows, make sure that you pushed checkbox on installation **GitBush** terminal, because it may be useful for you 
+
+# 3. Create working dirеctories
+3.1. Create directory, then go to this directoty:
 
 ```
 cd <some directories>
 ```
 
-2.2. Input this command in terminal to create "src", "headers" and build" directories and main.cpp file:
+3.2. Input this command in terminal to create "src", "headers" and build" directories and main.cpp file:
 
 ```
 make create
 ```
 
-2.3. If you want to create directories with **git** initialization, use this command:
+3.3. If you want to create directories with **git** initialization, use this command:
 
 ```
 make gcreate
 ```
 
-* Be warned, this command performs commant **git init** and creates hidden folder with **git** configuration file
+>Be warned, this command performs commant **git init** and creates hidden folder with **git** configuration file
 
-You may change name of this directories in Makefile (change points 7.1 - 10)
+>You may change name of this directories in Makefile (change points 7.1 - 10)
 
-# 3. Compile your project
+# 4. Compile your project
 In Makefile you can choose some parametrs:
 
 * Type of build:
@@ -111,27 +139,27 @@ PLATFORM = Linux
 
 And differend parametrs by point 10 
 
-3.1. Input this command in terminal to compile your project:
+4.1. Input this command in terminal to compile your project:
 
 ```
 make comp
 ```
 
-# 4. Run your project
+# 5. Run your project
 4.1. Input this command in terminal:
 
 ```
 make run
 ```
 
-4.2. Also, you may compile and run project by command:
+5.2. Also, you may compile and run project by command:
 
 ```
 make all
 ```
 
-# 5. Create commit at git
-5.1. Input this command in terminal:
+# 6. Create commit at git
+6.1. Input this command in terminal:
 
 ```
 make gcm
@@ -147,22 +175,22 @@ Enter commit message
 `
 without *" "*
 
-5.2. If you want to send changes at GitHub repository use this command:
+6.2. If you want to send changes at GitHub repository use this command:
 
 ```
 git push
 ```
 
-# 6. Remove directories with objective and executable files
+# 7. Remove directories with objective and executable files
 Input this commands in terminal to:
 
-6.1. Remove directories with objective and executable files:
+7.1. Remove directories with objective and executable files:
 
 ```
 make delbin
 ```
 
-6.2. Remove all directories without restoration:
+7.2. Remove all directories without restoration:
 
 ***Warning! Use this command with caution. Srpipt will request confirmation of actions***
 
