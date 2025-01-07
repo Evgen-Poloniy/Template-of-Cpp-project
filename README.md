@@ -49,7 +49,7 @@ Download (for example) in directory: "C:\Programs\msys64\" or "C:\msys64\"
 Input command in terminal MINGW64:
 
 ```
-
+pacman -S -yyu
 ```
 
 ```
