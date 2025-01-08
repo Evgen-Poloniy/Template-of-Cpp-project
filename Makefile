@@ -196,7 +196,7 @@ gcreate: create
 	fi
 
 cm:
-	read -p "Enter the names of files and/or directories to send to GitHub: " input_files && \
+	@read -p "Enter the names of files and/or directories to send to GitHub: " input_files && \
 	git add $$input_files && \
 	read -p "Enter commit message: " input_commit && \
 	git commit -m "$$input_commit"
