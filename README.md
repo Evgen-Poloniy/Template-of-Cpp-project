@@ -78,7 +78,7 @@ pacman -S make
 
 * If you use VS Code, run VS Code as **administrator**, because compilation with g++ requests access to temporary files in the **Temp** folder if you use **make** in GitBush 
 
->Unfortunately, I haven't added MSVC or cl compiles yet, but I'm working on this function
+>Unfortunately, I haven't added MSVC and cl compiles yet, but I'm working on this function
 
 # 2. Download Git
 
