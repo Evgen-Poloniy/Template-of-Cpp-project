@@ -6,7 +6,7 @@ BUILD = Debug
 ARCH = x64
 #-----------------------------------------|
 # 3. Choose platforms Win/Linux/Mac       |
-PLATFORM = Linux
+PLATFORM = Win
 #-----------------------------------------|
 # 4. Choose compile name:                 |
 CXX = g++
@@ -176,6 +176,8 @@ create:
 	    echo '' >> $(SRC_DIR)/main.cpp; \
 	    echo '    std::cout << "Hello, World!" << std::endl;' >> $(SRC_DIR)/main.cpp; \
 	    echo '' >> $(SRC_DIR)/main.cpp; \
+		echo '    system("pause");' >> $(SRC_DIR)/main.cpp; \
+		echo '' >> $(SRC_DIR)/main.cpp; \
 	    echo '    return 0;' >> $(SRC_DIR)/main.cpp; \
 	    echo '}' >> $(SRC_DIR)/main.cpp; \
 	fi
@@ -194,10 +196,11 @@ gcreate: create
 	fi
 
 cm:
-	@input_files=$(shell read -p "Enter the names of files and/or directories to send to GitHub: " var && echo $$var) && \
-	git add $$input_files
-	@input_commit=$(shell read -p "Enter commit message: " var && echo $$var) && \
+	@read -p "Enter the names of files and/or directories to send to GitHub: " input_files && \
+	git add $$input_files && \
+	read -p "Enter commit message: " input_commit && \
 	git commit -m "$$input_commit"
+
 
 push:
 	git push
